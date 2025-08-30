@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portafolio – Luis A. Zermeño</title>
+  <meta name="description" content="Portafolio de Luis Zermeño – Ingeniería/Desarrollo, proyectos y contacto." />
+  <meta property="og:title" content="Portafolio – Luis Zermeño" />
+  <meta property="og:description" content="Proyectos, experiencia y contacto." />
+  <meta property="og:type" content="website" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --card: #111318;
+      --fg: #e6e6e6;
+      --muted: #a8b3cf;
+      --brand: #4f46e5; /* índigo */
+      --brand-2: #06b6d4; /* cian */
+      --ring: 0 0 0 3px color-mix(in oklab, var(--brand) 35%, transparent);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --maxw: 1080px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f6f8fc; --card:#ffffff; --fg:#0f172a; --muted:#475569; --shadow:0 10px 30px rgba(2,6,23,.08);}  
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:20px}
+    /* NAV */
+    .nav{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:color-mix(in oklab,var(--bg) 70%, transparent);border-bottom:1px solid color-mix(in oklab,var(--fg) 10%, transparent);z-index:50}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:700}
+    .brand-dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .nav a{opacity:.9}
+    .nav a:hover{opacity:1}
+    .nav-links{display:flex;gap:18px}
+    /* HERO */
+    .hero{padding:48px 0 24px}
+    .hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center}
+    .title{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:0 0 12px}
+    .subtitle{font-size:clamp(16px,2.6vw,20px);color:var(--muted);margin:0 0 20px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{padding:.4rem .7rem;border:1px solid color-mix(in oklab,var(--fg) 14%, transparent);border-radius:999px;font-size:.9rem}
+    .cta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:.85rem 1rem;border-radius:12px;border:1px solid transparent;font-weight:600;display:inline-flex;gap:8px;align-items:center;transition:.2s;box-shadow:0 2px 0 rgba(0,0,0,.04)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:white}
+    .btn.primary:hover{transform:translateY(-1px)}
+    .btn.ghost{border-color:color-mix(in oklab,var(--fg) 14%, transparent)}
+    .btn.ghost:hover{background:color-mix(in oklab,var(--fg) 6%, transparent)}
+    .avatar-wrap{justify-self:center}
+    .avatar{width:min(280px,70%);aspect-ratio:1/1;border-radius:24px;box-shadow:var(--shadow);object-fit:cover;border:2px solid color-mix(in oklab,var(--fg) 8%, transparent)}
+    /* SECTIONS */
+    section{padding:28px 0}
+    .section-title{font-size:1.6rem;margin:8px 0 16px}
+    .grid{display:grid;gap:16px}
+    @media (min-width:720px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--card);border:1px solid color-mix(in oklab,var(--fg) 10%, transparent);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:transform .15s ease, box-shadow .15s ease}
+    .card:hover{transform:translateY(-2px)}
+    .card h3{margin:0 0 6px;font-size:1.1rem}
+    .meta{color:var(--muted);font-size:.95rem}
+    .card-footer{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+    .link{font-weight:600}
+    .link:hover{text-decoration:underline}
+    /* FOOTER */
+    footer{border-top:1px solid color-mix(in oklab,var(--fg) 10%, transparent);padding:24px 0;color:var(--muted)}
+    /* ACCESSIBILIDAD/UTILIDADES */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    :focus-visible{outline: none; box-shadow: var(--ring)}
+    /* RESPONSIVE */
+    @media (max-width:900px){.hero-inner{grid-template-columns:1fr;gap:18px}.avatar{width:220px}}
+  /* MODAL (video popup) */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:100}
+    .modal[open]{display:flex}
+    .modal-card{width:min(900px,92vw);background:var(--card);border:1px solid color-mix(in oklab,var(--fg) 10%, transparent);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid color-mix(in oklab,var(--fg) 10%, transparent)}
+    .modal-body{position:relative;background:#000;aspect-ratio:16/9}
+    .modal-body iframe,.modal-body video{position:absolute;inset:0;width:100%;height:100%}
+    .modal-close{border:0;background:transparent;font-size:1rem;color:var(--fg);cursor:pointer}
+    /* POPUP PDF */
+    .modal-body.is-pdf {
+      aspect-ratio: auto;
+      height: 85vh;
+    }
+    /* Education card accent */
+    .card.edu{
+      /* color de acento: usa tu paleta; este es “amber” amable */
+      --edu-accent: #f59e0b;
+      background: color-mix(in oklab, var(--edu-accent) 8%, var(--card));
+      border-color: color-mix(in oklab, var(--edu-accent) 38%, transparent);
+      box-shadow: var(--shadow);
+    }
+
+  </style>
+</head>
+<body>
+  <header class="nav" role="navigation" aria-label="Principal">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="Inicio">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Luis A. Zermeño</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#proyectos">Projects</a>
+        <a href="#sobre-mi">About</a>
+        <a href="#contacto">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <h1 class="title">Robotics Engineer / Developer</h1>
+          <!-- <p class="subtitle">Creo soluciones de software y robots que funcionan en el mundo real. Me especializo en <strong>ROS2</strong>, <strong>C++</strong>, <strong>Python</strong> y visión por computadora.</p> -->
+           <p class="subtitle">I build software and robots optimized for performance and real-world impact. I specialize in <strong>ROS2</strong>, <strong>C++</strong>, <strong>Python</strong>, and computer vision.</p>
+          <div class="tags" aria-label="Stack">
+            <span class="tag">ROS2</span>
+            <span class="tag">C++</span>
+            <span class="tag">Python</span>
+            <span class="tag">SLAM</span>
+            <span class="tag">Linux</span>
+          </div>
+          <div class="cta">
+            <a class="btn primary" href="#proyectos">View projects</a>
+            <a class="btn ghost" href="CV Luis Antonio Zermeño de Gorordo english.pdf" data-pdf="CV Luis Antonio Zermeño de Gorordo english.pdf" data-title="CV – Luis Zermeño">Open CV</a>
+          </div>
+        </div>
+        <div class="avatar-wrap">
+          <img class="avatar" src="foto.JPG" alt="Retrato de Luis Zermeño" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos">
+      <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="grid cols-2">
+          <article class="card">
+            <h3>AGV with HMI for Logistics</h3>
+            <p class="meta">ROS2 · SLAM · A* · YOLOv8</p>
+            <p>Autonomously guided vehicle with navigation and a web HMI. Perception + planning integration in an industrial setting.</p>
+            <div class="card-footer">
+              <a class="link" href="https://github.com/lantoniozermeno/agv-hmi-recovered" target="_blank" rel="noopener">Code</a>
+              <a class="link" href="https://youtu.be/SosgxxoDq58" data-video="https://www.youtube-nocookie.com/embed/SosgxxoDq58?rel=0&modestbranding=1" data-title="AGV with HMI for Logistics — Demo">Demo (video)</a>
+            </div>
+          </article>
+          
+          <article class="card">
+            <h3>Tello Drone: Face Tracking with MediaPipe</h3>
+            <p class="meta">Python · OpenCV · MediaPipe · Tello SDK</p>
+            <p>Real-time face-follow control on a DJI Tello. MediaPipe detection plus a proportional controller to keep the target centered, with proximity gating and max-altitude safety.</p>
+            <div class="card-footer">
+              <a class="link" href="https://github.com/lantoniozermeno/tello-face-tracking" target="_blank" rel="noopener">Code</a>
+              <a class="link" href="https://youtu.be/Hh1QaUGadNI" data-video="https://www.youtube-nocookie.com/embed/Hh1QaUGadNI?rel=0&modestbranding=1" data-title="Tello Face Tracking — Demo">Demo (video)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Autonomous Navigation & Traffic Sign Recognition</h3>
+            <p class="meta">ROS2 · Jetson Nano · OpenCV · YOLO · Odometry</p>
+            <p>Autonomous navigation, real-time traffic sign & traffic‑light recognition to trigger behaviors; odometry from wheel encoders; velocity controller; and a line follower using ROI/centroid error.</p>
+            <div class="card-footer">
+              <a class="link" href="https://github.com/lantoniozermeno/puzzlebot-autonomou-nav" target="_blank" rel="noopener">Code</a>
+              <a class="link" href="https://youtu.be/oyyzb4exsWA" data-video="https://www.youtube-nocookie.com/embed/oyyzb4exsWA?rel=0&modestbranding=1" data-title="Autonomous Navigation & Traffic Sign Recognition — Demo">Demo (video)</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Monte Carlo with 2D LiDAR Simulation</h3>
+            <p class="meta">Python · Raycasting · Monte Carlo</p>
+            <p>Monte Carlo Localization with a virtual sensor and grid maps; emphasis on performance and clear visualization.</p>
+            <div class="card-footer">
+              <a class="link" href="https://github.com/lantoniozermeno/montecarlo-2d-sim-hw" target="_blank" rel="noopener">Code</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>3D Geometry with Manim: Plane–Edge Intersection</h3>
+            <p class="meta">Python · Manim · Educational Visualization</p>
+            <p>Animated explanation of how to compute the intersection point between a plane and an edge of a 3D solid. Derives the line–plane intersection using a parametric line and evaluates it in the plane equation for a clear, visual proof.</p>
+            <div class="card-footer">
+              <a class="link" href="https://github.com/lantoniozermeno/Manim_Projects" target="_blank" rel="noopener">Code</a>
+              <a class="link" href="https://youtu.be/m3OWN2epMH0" data-video="https://www.youtube-nocookie.com/embed/m3OWN2epMH0?rel=0&modestbranding=1" data-title="3D Geometry with Manim: Plane–Edge Intersection — Demo">Demo (video)</a>
+            </div>
+          </article>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE MI / EDUCACIÓN -->
+    <section id="sobre-mi">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>Profile</h3>
+            <p>Robotics and Digital Systems Engineer. I am driven to create products with real human impact, with a strong focus on user experience and technical quality.</p>
+            <ul>
+              <li>Areas: autonomous navigation, perception, and HMI.</li>
+              <li>Interests: humanoids, human-robot interaction, and applied AI.</li>
+            </ul>
+          </div>
+          <div class="card edu">
+            <h3>Education</h3>
+            <ul>
+              <li><strong>Tecnológico de Monterrey</strong> — B.S. Robotics & Digital Systems (2025, MX)</li>
+              <li><strong>SIRS Lab, Univ. di Siena</strong> — Research Stay (2025, IT)</li>
+              <li>Courses: Embedded Systems, Computer Vision, Machine Learning, SLAM, Control, Estimation & Filtering, Real-Time Systems, Hardware Design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="card">
+          <p>Open to full-time roles and research collaborations. Email is best—I typically reply within 24 hours (CDMX, UTC−6/−5).</p>
+          <p><a class="link" href="mailto:luisantoniozdg@gmail.com">luisantoniozdg@gmail.com</a> · <a class="link" href="https://www.linkedin.com/in/luis-antonio-zerme%C3%B1o-de-gorordo-63a794307/" target="_blank" rel="noopener">LinkedIn</a> · <a class="link" href="https://github.com/lantoniozermeno" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para demos en video -->
+  <div id="video-modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="video-title">
+      <div class="modal-head">
+        <strong id="video-title">Demo</strong>
+        <button class="modal-close" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <small>2025 · Luis Antonio Zermeño</small>
+    </div>
+  </footer>
+
+  <!-- Si prefieres JS separado, crea main.js y mueve ahí el script. -->
+  <script>
+    // Pequeña mejora UX: scroll suave para anclas
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  </script>
+  <script>
+  // Pequeña mejora UX: scroll suave para anclas
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      const el = document.querySelector(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Lógica del modal para video y PDF
+  (function() {
+    const modal = document.getElementById('video-modal');
+    if (!modal) return;
+    const body = modal.querySelector('.modal-body');
+    const titleEl = document.getElementById('video-title');
+    const closeBtn = modal.querySelector('.modal-close');
+
+    function close() {
+      modal.removeAttribute('open');
+      modal.setAttribute('aria-hidden', 'true');
+      body.innerHTML = '';
+      body.classList.remove('is-pdf'); // Limpiamos la clase al cerrar
+    }
+
+    function open(options) {
+      modal.setAttribute('open', '');
+      modal.setAttribute('aria-hidden', 'false');
+      titleEl.textContent = options.title;
+
+      if (options.type === 'pdf') {
+        body.classList.add('is-pdf');
+        body.innerHTML = `<iframe src="${options.url}" title="${options.title}" frameborder="0"></iframe>`;
+      } else { // Es un video
+        if (/(youtube\.com|youtube-nocookie\.com|youtu\.be|vimeo\.com)/i.test(options.url)) {
+          body.innerHTML = `<iframe src="${options.url}" title="${options.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        } else {
+          body.innerHTML = `<video controls src="${options.url}" playsinline></video>`;
+        }
+      }
+      
+      const onEsc = (e) => { if (e.key === 'Escape') close(); };
+      document.addEventListener('keydown', onEsc, { once: true });
+      modal.addEventListener('click', (e) => { if (e.target === modal) close(); }, { once: true });
+      closeBtn.onclick = close;
+    }
+
+    // Activador para videos
+    document.querySelectorAll('[data-video]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        open({
+          type: 'video',
+          url: a.getAttribute('data-video'),
+          title: a.getAttribute('data-title') || a.textContent.trim()
+        });
+      });
+    });
+
+    // NUEVO: Activador para PDFs
+    document.querySelectorAll('[data-pdf]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        open({
+          type: 'pdf',
+          url: a.getAttribute('data-pdf'),
+          title: a.getAttribute('data-title') || a.textContent.trim()
+        });
+      });
+    });
+  })();
+</script>
+  
+</body>
+</html>
